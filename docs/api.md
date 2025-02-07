@@ -1,3 +1,5 @@
 # API Reference
 
-"::: blueprint.hello"
+::: osm_ai_helper.download_osm
+
+::: osm_ai_helper.utils.osm
