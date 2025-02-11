@@ -11,6 +11,18 @@ from osm_ai_helper.utils.coordinates import TILE_SIZE, lat_lon_to_pixel_col_row
 
 
 def group_elements_by_tile(elements: List[Dict], zoom: int):
+    """Broup elements by the tiles they belong to, based on the zoom level.
+
+    Each MAPBOX tile is a 512x512 pixel image.
+
+    Args:
+        elements (List[Dict]): List of elements from 
+            [download_osm](osm_ai_helper.download_osm.download_osm).
+        zoom (int): Zoom level. See https://docs.mapbox.com/help/glossary/zoom-level/.
+
+    Returns:
+        dict[tuple, list[dict]]: Grouped elements.
+    """
     grouped: dict[tuple, list[dict]] = defaultdict(list)
 
     for element in elements:

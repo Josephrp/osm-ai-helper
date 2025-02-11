@@ -26,6 +26,7 @@ def create_tile_dataset(input_annotation_file: str, output_dir: str, zoom: int =
             The names of the files will be in the format `{zoom}_{tile_col}_{tile_row}`.
 
         zoom (int, optional): Zoom level of the tiles to download.
+            See https://docs.mapbox.com/help/glossary/zoom-level/.
             Defaults to 18.
     """
     annotation_path = Path(input_annotation_file)
