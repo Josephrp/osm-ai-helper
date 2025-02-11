@@ -12,6 +12,7 @@ dependencies = [
   "fire",
   "loguru",
   "requests",
+  "shapely",
   "streamlit",
 ]
 

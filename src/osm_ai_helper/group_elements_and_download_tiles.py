@@ -9,16 +9,14 @@ from osm_ai_helper.utils.tiles import download_tile, group_elements_by_tile
 
 
 @logger.catch(reraise=True)
-def create_tile_dataset(input_annotation_file: str, output_dir: str, zoom: int = 18):
+def group_elements_and_download_tiles(
+    elements_file: str, output_dir: str, zoom: int = 18
+):
     """
-    Create dataset of satellite images and annotations from the given OSM elements.
-
-    Groups the elements by tile and downloads the satellite image
-    corresponding to the tile.
+    Groups the elements by tile and downloads the satellite image corresponding to the tile.
 
     Args:
-        input_annotation_file (str): Path to the input annotation file.
-            The file should be a JSON file containing a list of OSM elements.
+        input_annotation_file (str): Path to the JSON file containing OSM elements.
             See [download_osm](osm_ai_helper.download_osm.download_osm).
         output_dir (str): Output directory.
             The images and annotations will be saved in this directory.
@@ -29,7 +27,7 @@ def create_tile_dataset(input_annotation_file: str, output_dir: str, zoom: int =
             See https://docs.mapbox.com/help/glossary/zoom-level/.
             Defaults to 18.
     """
-    annotation_path = Path(input_annotation_file)
+    annotation_path = Path(elements_file)
     area = annotation_path.stem
     output_path = Path(output_dir)
 
@@ -47,7 +45,6 @@ def create_tile_dataset(input_annotation_file: str, output_dir: str, zoom: int =
         if n % 50 == 0:
             logger.info(f"Processed {n}/{total} tiles")
         n += 1
-        logger.info(f"Downloading tile {tile_col}, {tile_row}")
         output_name = f"{zoom}_{tile_col}_{tile_row}"
         image_name = f"{output_path / area / output_name}.jpg"
         annotation_name = f"{output_path / area / output_name}.json"
@@ -65,4 +62,4 @@ def create_tile_dataset(input_annotation_file: str, output_dir: str, zoom: int =
 
 
 if __name__ == "__main__":
-    Fire(create_tile_dataset)
+    Fire(group_elements_and_download_tiles)

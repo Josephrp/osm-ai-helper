@@ -16,7 +16,7 @@ def group_elements_by_tile(elements: List[Dict], zoom: int):
     Each MAPBOX tile is a 512x512 pixel image.
 
     Args:
-        elements (List[Dict]): List of elements from 
+        elements (List[Dict]): List of elements from
             [download_osm](osm_ai_helper.download_osm.download_osm).
         zoom (int): Zoom level. See https://docs.mapbox.com/help/glossary/zoom-level/.
 
