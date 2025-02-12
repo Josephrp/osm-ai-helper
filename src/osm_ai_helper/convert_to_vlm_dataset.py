@@ -67,6 +67,6 @@ def convert_to_vlm_dataset(input_dir: str, instruction: str):
             },
             {"role": "assistant", "content": [{"type": "text", "text": str(points)}]},
         ]
-        vlm_dataset.append(conversation)
+        vlm_dataset.append({"messages": conversation})
 
     return vlm_dataset
