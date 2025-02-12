@@ -11,25 +11,28 @@ def show_vlm_entry(entry):
             Expected format:
 
             ```py
-            entry = [
-                { "role": "user",
-                "content" : [
-                    {"type" : "text",  "text"  : instruction},
-                    {"type" : "image", "image" : image} ]
-                },
-                { "role" : "assistant",
-                "content" : [
-                    {"type" : "text",  "text"  : str(points)} ]
-                },
-            ]
+            entry = {
+                "messages": [
+                    { "role": "user",
+                    "content" : [
+                        {"type" : "text",  "text"  : instruction},
+                        {"type" : "image", "image" : image} ]
+                    },
+                    { "role" : "assistant",
+                    "content" : [
+                        {"type" : "text",  "text"  : str(points)} ]
+                    },
+                ]
+            }
             ```
 
     Returns:
         Image: Image with points drawn.
     """
-    image = entry[0]["content"][1]["image"]
+    messages = entry["messages"]
+    image = messages[0]["content"][1]["image"]
     width, height = image.size
-    points = eval(entry[1]["content"][0]["text"])
+    points = eval(messages[1]["content"][0]["text"])
     draw = ImageDraw.Draw(image)
 
     for point in points:
