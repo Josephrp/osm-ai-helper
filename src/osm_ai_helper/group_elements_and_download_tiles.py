@@ -27,10 +27,8 @@ def group_elements_and_download_tiles(
             Defaults to 18.
     """
     annotation_path = Path(elements_file)
-    area = annotation_path.stem
     output_path = Path(output_dir)
-
-    (output_path / area).mkdir(exist_ok=True, parents=True)
+    output_path.mkdir(exist_ok=True, parents=True)
 
     elements = json.loads(annotation_path.read_text())
 
@@ -45,8 +43,8 @@ def group_elements_and_download_tiles(
             logger.info(f"Processed {n}/{total} tiles")
         n += 1
         output_name = f"{zoom}_{tile_col}_{tile_row}"
-        image_name = f"{output_path / area / output_name}.jpg"
-        annotation_name = f"{output_path / area / output_name}.json"
+        image_name = f"{output_path / output_name}.jpg"
+        annotation_name = f"{output_path / output_name}.json"
         if not Path(image_name).exists():
             image = download_tile(zoom, tile_col, tile_row, mapbox_token)
             image.save(image_name)
