@@ -1,5 +1,4 @@
 import json
-import os
 from pathlib import Path
 
 from fire import Fire
@@ -10,7 +9,7 @@ from osm_ai_helper.utils.tiles import download_tile, group_elements_by_tile
 
 @logger.catch(reraise=True)
 def group_elements_and_download_tiles(
-    elements_file: str, output_dir: str, zoom: int = 18
+    elements_file: str, output_dir: str, mapbox_token: str, zoom: int = 18
 ):
     """
     Groups the elements by tile and downloads the satellite image corresponding to the tile.
@@ -22,7 +21,7 @@ def group_elements_and_download_tiles(
             The images and annotations will be saved in this directory.
             The images will be saved as JPEG files and the annotations as JSON files.
             The names of the files will be in the format `{zoom}_{tile_col}_{tile_row}`.
-
+        mapbox_token (str): [Mapbox](https://console.mapbox.com/) token.
         zoom (int, optional): Zoom level of the tiles to download.
             See https://docs.mapbox.com/help/glossary/zoom-level/.
             Defaults to 18.
@@ -49,7 +48,7 @@ def group_elements_and_download_tiles(
         image_name = f"{output_path / area / output_name}.jpg"
         annotation_name = f"{output_path / area / output_name}.json"
         if not Path(image_name).exists():
-            image = download_tile(zoom, tile_col, tile_row, os.environ["MAPBOX_TOKEN"])
+            image = download_tile(zoom, tile_col, tile_row, mapbox_token)
             image.save(image_name)
         if not Path(annotation_name).exists():
             Path(annotation_name).write_text(

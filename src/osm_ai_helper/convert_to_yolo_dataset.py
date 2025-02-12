@@ -41,7 +41,7 @@ def grouped_elements_to_annotation(
         row_center = (min_row + max_row) / 2
         row_center = (row_center - top_pixel) / TILE_SIZE
         row_center = round(row_center, 2)
-        width = max_col - min_col 
+        width = max_col - min_col
         width /= TILE_SIZE
         width = round(width, 2)
         height = max_row - min_row
@@ -72,7 +72,7 @@ def convert_to_yolo_dataset(
         yolo_annotation = grouped_elements_to_annotation(
             annotation["elements"], zoom, tile_col, tile_row
         )
-        input_path.with_suffix(".txt").write_text(yolo_annotation)
+        image_path.with_suffix(".txt").write_text(yolo_annotation)
 
 
 if __name__ == "__main__":
