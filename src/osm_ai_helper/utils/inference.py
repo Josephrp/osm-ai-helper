@@ -85,10 +85,11 @@ def tile_prediction(
     bbox_predictor, sam_predictor, image: np.ndarray, overlap: float = 0.125
 ):
     stacked_output = np.zeros((image.shape[0], image.shape[1]), dtype=np.uint8)
-
-    sam_predictor.set_image(image)
     for top, left, bottom, right in yield_tile_corners(image, TILE_SIZE, overlap):
-        bbox_result = bbox_predictor.predict(image[left:right, top:bottom])
+        tile_image = image[left:right, top:bottom].copy()
+        sam_predictor.set_image(tile_image)
+
+        bbox_result = bbox_predictor.predict(tile_image)
 
         for bbox in bbox_result:
             if len(bbox.boxes.xyxy) == 0:
