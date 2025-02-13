@@ -106,7 +106,7 @@ def tile_prediction(
                 polygon = np.array(polygon, dtype=np.int32).reshape((-1, 1, 2))
                 painted_mask = cv2.fillPoly(painted_mask, [polygon], color=(255, 0, 0))
 
-        stacked_output[left:right, top:bottom] += painted_mask
+            stacked_output[left:right, top:bottom] += painted_mask
 
     stacked_output[stacked_output != 0] = 255
 
