@@ -7,7 +7,7 @@ from shapely import Polygon
 from skimage.draw import polygon as draw_polygon
 from skimage.measure import find_contours
 
-from pool_finder.utils.coordinates import (
+from osm_ai_helper.utils.coordinates import (
     lat_lon_to_pixel_col_row,
     meters_col_row_to_lat_lon,
     pixel_col_row_to_meters_col_row,
