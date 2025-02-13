@@ -92,11 +92,11 @@ def tile_prediction(
         for bbox in bbox_result:
             if len(bbox.boxes.xyxy) == 0:
                 continue
-            left, top, right, bottom = bbox.boxes.xyxy[0]
+            bbox_left, bbox_top, bbox_right, bbox_bottom = bbox.boxes.xyxy[0]
             mask_result = sam_predictor(
                 image[left:right, top:bottom],
                 bboxes=[
-                    [int(left) - 5, int(top) - 5, int(right) + 5, int(bottom) + 5],
+                    [int(bbox_left) - 5, int(bbox_top) - 5, int(bbox_right) + 5, int(bbox_bottom) + 5],
                 ],
             )
             if mask_result[0].masks is None:
