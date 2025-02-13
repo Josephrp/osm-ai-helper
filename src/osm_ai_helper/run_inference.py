@@ -6,7 +6,8 @@ from fire import Fire
 from loguru import logger
 
 from PIL import Image
-from ultralytics import FastSAM, YOLO
+from sam2.sam2_image_predictor import SAM2ImagePredictor
+from ultralytics import YOLO
 
 from osm_ai_helper.utils.coordinates import (
     TILE_SIZE,
@@ -34,11 +35,13 @@ def run_inference(
     lat_lon: Tuple[float, float],
     token: str,
     margin: int = 5,
+    sam_model: str = "facebook/sam2-hiera-small",
     selector: str = "leisure=swimming_pool",
     zoom: int = 18,
 ):
     bbox_predictor = YOLO(model_file)
-    sam_predictor = FastSAM("FastSAM-s.pt")
+    sam_predictor = SAM2ImagePredictor.from_pretrained(sam_model)
+
     bbox = lat_lon_to_bbox(*lat_lon, zoom, margin)
 
     output_path = Path(output_dir) / f"{zoom}_{'_'.join(map(str, bbox))}"

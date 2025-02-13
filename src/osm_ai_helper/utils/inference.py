@@ -86,30 +86,22 @@ def tile_prediction(
 ):
     stacked_output = np.zeros((image.shape[0], image.shape[1]), dtype=np.uint8)
 
+    sam_predictor.set_image(image)
     for top, left, bottom, right in yield_tile_corners(image, TILE_SIZE, overlap):
         bbox_result = bbox_predictor.predict(image[left:right, top:bottom])
 
         for bbox in bbox_result:
             if len(bbox.boxes.xyxy) == 0:
                 continue
-            bbox_left, bbox_top, bbox_right, bbox_bottom = bbox.boxes.xyxy[0]
-            mask_result = sam_predictor(
-                image[left:right, top:bottom],
-                bboxes=[
-                    [int(bbox_left) - 5, int(bbox_top) - 5, int(bbox_right) + 5, int(bbox_bottom) + 5],
-                ],
+
+            masks, *_ = sam_predictor.predict(
+                point_coords=None,
+                point_labels=None,
+                box=[list(int(x) for x in bbox.boxes.xyxy[0])],
+                multimask_output=False,
             )
-            if mask_result[0].masks is None:
-                continue
 
-            polygons = [mask.tolist() for mask in mask_result[0].masks.xy]
-
-            painted_mask = np.zeros((TILE_SIZE, TILE_SIZE), dtype=np.uint8)
-            for polygon in polygons:
-                polygon = np.array(polygon, dtype=np.int32).reshape((-1, 1, 2))
-                painted_mask = cv2.fillPoly(painted_mask, [polygon], color=(255, 0, 0))
-
-            stacked_output[left:right, top:bottom] += painted_mask
+            stacked_output[left:right, top:bottom] += masks[0]
 
     stacked_output[stacked_output != 0] = 255
 
