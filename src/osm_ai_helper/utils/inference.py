@@ -94,7 +94,7 @@ def tile_prediction(
                 continue
             mask_result = sam_predictor(
                 image[left:right, top:bottom],
-                bboxes=[[list(int(x) for x in bbox.boxes.xyxy[0])]],
+                bboxes=[list(int(x) for x in bbox.boxes.xyxy[0])],
             )
             if mask_result[0].masks is None:
                 continue
