@@ -84,7 +84,7 @@ def run_inference(
         with open(f"{output_path}/{n}.json", "w") as f:
             json.dump(lon_lat_polygon, f)
 
-        painted_image_crop = crop_polygon(polygon, painted_img, margin=50)
+        painted_image_crop = crop_polygon(polygon, painted_img, margin=100)
         painted_image_crop.save(f"{output_path}/{n}_painted.png")
 
     return painted_img, existing, new, missed
