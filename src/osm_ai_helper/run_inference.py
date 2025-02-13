@@ -45,9 +45,8 @@ def run_inference(
     output_path.mkdir(exist_ok=True, parents=True)
 
     logger.info(f"Downloading elements for {selector} in {bbox}")
-    grouped_elements, _ = group_elements_by_tile(
-        get_elements(selector, bbox=bbox), zoom
-    )
+    elements = get_elements(selector, bbox=bbox)
+    grouped_elements = group_elements_by_tile(elements, zoom)
 
     logger.info(f"Downloading stacked image and mask for {bbox}")
     stacked_image, stacked_mask = download_stacked_image_and_mask(
