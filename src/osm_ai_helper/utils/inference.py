@@ -102,7 +102,7 @@ def tile_prediction(
                 multimask_output=False,
             )
 
-            stacked_output[left:right, top:bottom] += masks[0]
+            stacked_output[left:right, top:bottom] += masks[0].astype(np.uint8)
 
     stacked_output[stacked_output != 0] = 255
 
