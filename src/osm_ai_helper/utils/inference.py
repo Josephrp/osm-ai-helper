@@ -90,7 +90,7 @@ def tile_prediction(
         bbox_result = bbox_predictor.predict(image[left:right, top:bottom])
 
         for bbox in bbox_result:
-            if bbox.boxes is None:
+            if len(bbox.boxes.xyxy) == 0:
                 continue
             mask_result = sam_predictor(
                 image[left:right, top:bottom],
