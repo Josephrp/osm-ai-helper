@@ -90,14 +90,16 @@ def tile_prediction(
         bbox_result = bbox_predictor.predict(image[left:right, top:bottom])
 
         for bbox in bbox_result:
+            if bbox.boxes is None:
+                continue
             mask_result = sam_predictor(
                 image[left:right, top:bottom],
                 bboxes=[[list(int(x) for x in bbox.boxes.xyxy[0])]],
             )
             if mask_result[0].masks is None:
-                polygons = []
-            else:
-                polygons = [mask.tolist() for mask in mask_result[0].masks.xy]
+                continue
+
+            polygons = [mask.tolist() for mask in mask_result[0].masks.xy]
 
             painted_mask = np.zeros((TILE_SIZE, TILE_SIZE), dtype=np.uint8)
             for polygon in polygons:
