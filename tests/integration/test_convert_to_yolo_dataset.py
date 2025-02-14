@@ -9,10 +9,7 @@ from osm_ai_helper.convert_to_yolo_dataset import grouped_elements_to_annotation
         (
             0,
             0,
-            (
-                "0 0.83 0.79 0.33 0.42\n"
-                "0 0.67 0.59 0.01 0.01\n"
-            ),
+            ("0 0.83 0.79 0.33 0.42\n" "0 0.67 0.59 0.01 0.01\n"),
         ),
         (
             0,

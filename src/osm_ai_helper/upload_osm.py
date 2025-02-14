@@ -21,7 +21,9 @@ TOKEN_FILE = "/tmp/osm_token.json"
 
 
 def get_oauth_session(token=None):
-    return OAuth2Session(CLIENT_ID, redirect_uri=REDIRECT_URI, token=token, scope=["write_api"])
+    return OAuth2Session(
+        CLIENT_ID, redirect_uri=REDIRECT_URI, token=token, scope=["write_api"]
+    )
 
 
 def fetch_token(session, authorization_response):
@@ -34,7 +36,7 @@ def fetch_token(session, authorization_response):
 
 def load_token():
     try:
-        with open(TOKEN_FILE, 'r') as f:
+        with open(TOKEN_FILE, "r") as f:
             token = json.load(f)
             logger.info(f"Token loaded from {TOKEN_FILE}")
             return token
@@ -45,18 +47,20 @@ def load_token():
         logger.warning(f"Invalid JSON in token file {TOKEN_FILE}. Ignoring.")
         return None
 
+
 def authorize():
     osm_session = get_oauth_session()
 
-    authorization_url, state = osm_session.authorization_url(
-        AUTHORIZATION_BASE_URL)
+    authorization_url, state = osm_session.authorization_url(AUTHORIZATION_BASE_URL)
 
     print(f"Please go to this URL and authorize the application: {authorization_url}")
-    authorization_response = input("Enter the full callback URL you were redirected to: ")
+    authorization_response = input(
+        "Enter the full callback URL you were redirected to: "
+    )
 
     token = fetch_token(osm_session, authorization_response)
     logger.info(f"Token fetched successfully: {token}")
-    with open(TOKEN_FILE, 'w') as f:
+    with open(TOKEN_FILE, "w") as f:
         json.dump(token, f)
     logger.info(f"Token saved to {TOKEN_FILE}")
     return token
@@ -72,12 +76,14 @@ def ensure_authorized_session():
         token = authorize()
         osm_session.token = token
     else:
-        if 'access_token' in osm_session.token and osm_session.token['access_token']:
+        if "access_token" in osm_session.token and osm_session.token["access_token"]:
             logger.info("Token exists, attempting to use it.")
         else:
-             logger.warning("Stored token might be invalid or incomplete. Re-authorizing.")
-             token = authorize()
-             osm_session.token = token
+            logger.warning(
+                "Stored token might be invalid or incomplete. Re-authorizing."
+            )
+            token = authorize()
+            osm_session.token = token
 
     return osm_session
 
@@ -86,7 +92,7 @@ def ensure_authorized_session():
 def open_changeset(
     osm_session,
     url: str = "https://github.com/mozilla-ai/osm-ai-helper",
-    created_by: str= "https://github.com/mozilla-ai/osm-ai-helper",
+    created_by: str = "https://github.com/mozilla-ai/osm-ai-helper",
     comment: str = "Add Swimming Pools",
     source: str = "aerial imagery",
 ):
@@ -101,7 +107,7 @@ def open_changeset(
 
     changeset = None
     try:
-        response = osm_session.put( # Use the session for requests
+        response = osm_session.put(  # Use the session for requests
             f"{API}/changeset/create",
             data=body,
             headers={
@@ -109,28 +115,24 @@ def open_changeset(
             },
         )
         logger.info(f"CREATE: {response}, {response.content}")
-        response.raise_for_status() # Raise HTTPError for bad responses (4xx or 5xx)
+        response.raise_for_status()  # Raise HTTPError for bad responses (4xx or 5xx)
         changeset = int(response.content.decode().strip())
         yield changeset
     finally:
         if changeset:
-            response = osm_session.put( # Use the session for requests
+            response = osm_session.put(  # Use the session for requests
                 f"{API}/changeset/{changeset}/close",
             )
             logger.info(f"CLOSE: {response}, {response.content}")
             response.raise_for_status()
 
 
-def upload_polygon(osm_session, lon_lat_polygon, changeset): # Pass the OAuth session
+def upload_polygon(osm_session, lon_lat_polygon, changeset):  # Pass the OAuth session
     osmchange = ET.Element("osmChange", version="0.6", generator="iD")
     create = ET.SubElement(osmchange, "create")
 
     way = ET.Element("way", id="-1", version="0")
-    tags = {
-        "leisure": "swimming_pool",
-        "access": "private",
-        "location": "outdoor"
-    }
+    tags = {"leisure": "swimming_pool", "access": "private", "location": "outdoor"}
     for k, v in tags.items():
         ET.SubElement(way, "tag", k=k, v=v)
 
@@ -154,7 +156,7 @@ def upload_polygon(osm_session, lon_lat_polygon, changeset): # Pass the OAuth se
     for element in create:
         element.attrib["changeset"] = str(changeset)
 
-    response = osm_session.post( # Use the session for requests
+    response = osm_session.post(  # Use the session for requests
         f"{API}/changeset/{changeset}/upload",
         data=ET.tostring(osmchange, "utf-8"),
         headers={
@@ -166,7 +168,6 @@ def upload_polygon(osm_session, lon_lat_polygon, changeset): # Pass the OAuth se
 
 
 def upload(results_folder: str):
-
     osm_session = ensure_authorized_session()
 
     lon_lat_polygons = [
