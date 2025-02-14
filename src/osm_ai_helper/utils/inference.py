@@ -89,7 +89,7 @@ def tile_prediction(
         tile_image = image[left:right, top:bottom].copy()
         sam_predictor.set_image(tile_image)
 
-        bbox_result = bbox_predictor.predict(tile_image)
+        bbox_result = bbox_predictor.predict(tile_image, verbose=False)
 
         for bbox in bbox_result:
             if len(bbox.boxes.xyxy) == 0:
