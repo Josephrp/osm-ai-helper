@@ -1,4 +1,5 @@
 import json
+import os
 from pathlib import Path
 from typing import Tuple
 
@@ -33,7 +34,6 @@ def run_inference(
     model_file: str,
     output_dir: str,
     lat_lon: Tuple[float, float],
-    token: str,
     margin: int = 5,
     sam_model: str = "facebook/sam2-hiera-small",
     selector: str = "leisure=swimming_pool",
@@ -54,7 +54,7 @@ def run_inference(
 
     logger.info(f"Downloading stacked image and mask for {bbox}")
     stacked_image, stacked_mask = download_stacked_image_and_mask(
-        bbox, grouped_elements, zoom, token
+        bbox, grouped_elements, zoom, os.environ["MAPBOX_TOKEN"]
     )
     Image.fromarray(stacked_image).save(output_path / "full_image.png")
     Image.fromarray(stacked_mask).save(output_path / "full_mask.png")
