@@ -21,7 +21,7 @@ We’d love to see how you can enhance this Blueprint! If you create improvement
 Got an idea for how this Blueprint could be improved? You can share your suggestions through [GitHub Discussions](https://github.com/mozilla-ai/osm-ai-helper/discussions).
 
 ### 🌍 **Build New Blueprints**
-This project is part of a larger initiative to create a collection of reusable starter code solutions that use open-source AI tools. If you’re inspired to create your own Blueprint, you can use the [Blueprint-template](https://github.com/new?template_name=Blueprint-template&template_owner=mozilla-ai) to get started.
+This project is part of a larger initiative to create a collection of reusable starter code solutions that use open-source AI tools. If you’re inspired to create your own Blueprint, you can use the [osm-ai-helper](https://github.com/new?template_name=osm-ai-helper&template_owner=mozilla-ai) to get started.
 
 ---
 

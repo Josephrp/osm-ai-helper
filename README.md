@@ -9,37 +9,37 @@
   </picture>
 </p>
 
-This blueprint guides you to ...
+# OSM-AI-helper: a Blueprint by Mozilla.ai for contributing to Open Street Maps with the help of AI
+
+[![](https://dcbadge.limes.pink/api/server/YuMNeuKStr?style=flat)](https://discord.gg/YuMNeuKStr)
+[![Docs](https://github.com/mozilla-ai/osm-ai-helper/actions/workflows/docs.yaml/badge.svg)](https://github.com/mozilla-ai/osm-ai-helper/actions/workflows/docs.yaml/)
+[![Tests](https://github.com/mozilla-ai/osm-ai-helper/actions/workflows/tests.yaml/badge.svg)](https://github.com/mozilla-ai/osm-ai-helper/actions/workflows/tests.yaml/)
+[![Ruff](https://github.com/mozilla-ai/osm-ai-helper/actions/workflows/lint.yaml/badge.svg?label=Ruff)](https://github.com/mozilla-ai/osm-ai-helper/actions/workflows/lint.yaml/)
 
 📘 To explore this project further and discover other Blueprints, visit the [**Blueprints Hub**](https://developer-hub.mozilla.ai/).
 
-👉 📖 For more detailed guidance on using this project, please visit our [**Docs here**](https://mozilla-ai.github.io/Blueprint-template/)
+👉 📖 For more detailed guidance on using this project, please visit our [**Docs here**](https://mozilla-ai.github.io/osm-ai-helper/)
 
 ### Built with
+
 - Python 3.10+
-- Open-Source Tool 1
-- Open-Source Tool 2
-- ...
+- [Ultralytics](https://github.com/ultralytics/ultralytics)
+- [SAM 2](https://github.com/facebookresearch/sam2)
+
 
 ## Quick-start
 
+Get started right away finding swimming pools and contributing them to Open Street Maps:
 
-## How it Works
+| Find Swimming Pools |
+| ------------------- |
+| [![Run Inference](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mozilla-ai/osm-ai-helper/blob/main/demo/run_inference.ipynb)
 
+You can also create your own dataset and finetune a new model for a different use case:
 
-## Pre-requisites
-
-- **System requirements**:
-  - OS: Windows, macOS, or Linux
-  - Python 3.10 or higher
-  - Minimum RAM:
-  - Disk space:
-
-- **Dependencies**:
-  - Dependencies listed in `pyproject.toml`
-
-
-## Troubleshooting
+| Create Dataset  | Finetune Model |
+| --------------- | -------------- |
+| [![Create Dataset](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mozilla-ai/osm-ai-helper/blob/main/demo/create_dataset.ipynb) | [![Finetune Model](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mozilla-ai/osm-ai-helper/blob/main/demo/finetune_model.ipynb) |
 
 
 ## License

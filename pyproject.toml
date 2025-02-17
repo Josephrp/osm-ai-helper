@@ -13,7 +13,6 @@ dependencies = [
   "loguru",
   "requests",
   "shapely",
-  "streamlit",
 ]
 
 [project.optional-dependencies]
@@ -29,9 +28,9 @@ tests = [
 ]
 
 [project.urls]
-Documentation = "https://mozilla-ai.github.io/Blueprint-template/"
-Issues = "https://github.com/mozilla-ai/Blueprint-template/issues"
-Source = "https://github.com/mozilla-ai/Blueprint-template"
+Documentation = "https://mozilla-ai.github.io/osm-ai-helper/"
+Issues = "https://github.com/mozilla-ai/osm-ai-helper/issues"
+Source = "https://github.com/mozilla-ai/osm-ai-helper"
 
 [tool.setuptools.packages.find]
 exclude = ["tests", "tests.*"]
