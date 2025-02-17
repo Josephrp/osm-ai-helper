@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 from shutil import move
 
@@ -21,7 +20,7 @@ class StreamlitHandler:
     def write(self, message):
         self.log_messages += message
         self.text_widget.code(self.log_messages)
-        return 
+        return
 
 
 @st.fragment
@@ -33,10 +32,11 @@ def inference(lat_lon, margin):
         local_dir="models",
     )
     run_inference(
-        model_file="models/model.pt", 
-        output_dir="results", 
+        model_file="models/model.pt",
+        output_dir="results",
         lat_lon=lat_lon,
-        margin=margin)
+        margin=margin,
+    )
 
 
 @st.fragment
@@ -98,5 +98,9 @@ if st_data.get("last_clicked"):
 
         osm_client_id = st.text_input("OSM_CLIENT_ID")
         osm_client_secret = st.text_input("OSM_CLIENT_SECRET")
-        if st.button("Upload all polygons in `keep`") and osm_client_id and osm_client_id:
+        if (
+            st.button("Upload all polygons in `keep`")
+            and osm_client_id
+            and osm_client_id
+        ):
             upload_results()

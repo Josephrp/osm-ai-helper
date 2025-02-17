@@ -41,7 +41,8 @@ def run_inference(
 ):
     bbox_predictor = YOLO(model_file)
     sam_predictor = SAM2ImagePredictor.from_pretrained(
-        sam_model, device="cuda" if torch.cuda.is_available() else "cpu")
+        sam_model, device="cuda" if torch.cuda.is_available() else "cpu"
+    )
 
     bbox = lat_lon_to_bbox(*lat_lon, zoom, margin)
 
