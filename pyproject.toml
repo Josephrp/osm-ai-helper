@@ -10,12 +10,21 @@ requires-python = ">=3.10"
 dynamic = ["version"]
 dependencies = [
   "fire",
+  "huggingface_hub",
   "loguru",
   "requests",
+  "sam2",
   "shapely",
+  "ultralytics"
 ]
 
 [project.optional-dependencies]
+demo = [
+  "folium",
+  "streamlit",
+  "streamlit-folium"
+]
+
 docs = [
   "mkdocs",
   "mkdocs-material",
