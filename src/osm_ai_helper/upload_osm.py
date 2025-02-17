@@ -9,10 +9,6 @@ from loguru import logger
 from requests_oauthlib import OAuth2Session
 
 API = "https://api.openstreetmap.org/api/0.6"
-
-# Get from OSM Application registration
-CLIENT_ID = os.environ["OSM_CLIENT_ID"]
-CLIENT_SECRET = os.environ["OSM_CLIENT_SECRET"]
 REDIRECT_URI = "https://127.0.0.1:8000"
 
 AUTHORIZATION_BASE_URL = "https://www.openstreetmap.org/oauth2/authorize"
@@ -20,17 +16,17 @@ TOKEN_URL = "https://www.openstreetmap.org/oauth2/token"
 TOKEN_FILE = "/tmp/osm_token.json"
 
 
-def get_oauth_session(token=None):
+def get_oauth_session(client_id, token=None):
     return OAuth2Session(
-        CLIENT_ID, redirect_uri=REDIRECT_URI, token=token, scope=["write_api"]
+        client_id, redirect_uri=REDIRECT_URI, token=token, scope=["write_api"]
     )
 
 
-def fetch_token(session, authorization_response):
+def fetch_token(session, authorization_response, client_secret):
     return session.fetch_token(
         TOKEN_URL,
         authorization_response=authorization_response,
-        client_secret=CLIENT_SECRET,
+        client_secret=client_secret,
     )
 
 
@@ -48,8 +44,8 @@ def load_token():
         return None
 
 
-def authorize():
-    osm_session = get_oauth_session()
+def authorize(client_id, client_secret):
+    osm_session = get_oauth_session(client_id)
 
     authorization_url, state = osm_session.authorization_url(AUTHORIZATION_BASE_URL)
 
@@ -58,7 +54,7 @@ def authorize():
         "Enter the full callback URL you were redirected to: "
     )
 
-    token = fetch_token(osm_session, authorization_response)
+    token = fetch_token(osm_session, authorization_response, client_secret)
     logger.info(f"Token fetched successfully: {token}")
     with open(TOKEN_FILE, "w") as f:
         json.dump(token, f)
@@ -66,14 +62,14 @@ def authorize():
     return token
 
 
-def ensure_authorized_session():
+def ensure_authorized_session(client_id, client_secret):
     token_data = load_token()
 
     osm_session = get_oauth_session(token=token_data)
 
     if not token_data:
         logger.info("No valid token found, starting authorization flow.")
-        token = authorize()
+        token = authorize(client_id, client_secret)
         osm_session.token = token
     else:
         if "access_token" in osm_session.token and osm_session.token["access_token"]:
@@ -168,7 +164,11 @@ def upload_polygon(osm_session, lon_lat_polygon, changeset):  # Pass the OAuth s
 
 
 def upload(results_folder: str):
-    osm_session = ensure_authorized_session()
+    # Get from OSM Application registration
+    client_id = os.environ["OSM_CLIENT_ID"]
+    client_secret = os.environ["OSM_CLIENT_SECRET"]
+
+    osm_session = ensure_authorized_session(client_id, client_secret)
 
     lon_lat_polygons = [
         json.loads(result.read_text()) for result in Path(results_folder).glob("*.json")

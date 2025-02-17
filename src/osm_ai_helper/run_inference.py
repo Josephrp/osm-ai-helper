@@ -3,9 +3,9 @@ import os
 from pathlib import Path
 from typing import Tuple
 
+import torch
 from fire import Fire
 from loguru import logger
-
 from PIL import Image
 from sam2.sam2_image_predictor import SAM2ImagePredictor
 from ultralytics import YOLO
@@ -34,13 +34,14 @@ def run_inference(
     model_file: str,
     output_dir: str,
     lat_lon: Tuple[float, float],
-    margin: int = 5,
+    margin: int = 1,
     sam_model: str = "facebook/sam2-hiera-small",
     selector: str = "leisure=swimming_pool",
     zoom: int = 18,
 ):
     bbox_predictor = YOLO(model_file)
-    sam_predictor = SAM2ImagePredictor.from_pretrained(sam_model)
+    sam_predictor = SAM2ImagePredictor.from_pretrained(
+        sam_model, device="cuda" if torch.cuda.is_available() else "cpu")
 
     bbox = lat_lon_to_bbox(*lat_lon, zoom, margin)
 
@@ -52,7 +53,7 @@ def run_inference(
     grouped_elements = group_elements_by_tile(elements, zoom)
     logger.info(f"Found {len(elements)} elements")
 
-    logger.info(f"Downloading stacked image and mask for {bbox}")
+    logger.info(f"Downloading all tiles within {bbox}")
     stacked_image, stacked_mask = download_stacked_image_and_mask(
         bbox, grouped_elements, zoom, os.environ["MAPBOX_TOKEN"]
     )
@@ -67,7 +68,7 @@ def run_inference(
 
     logger.info("Finding existing, new and missed polygons")
     existing, new, missed = polygon_evaluation(stacked_mask, stacked_output)
-
+    logger.info(f"{len(existing)} exiting, {len(new)} new and {len(missed)} missied.")
     logger.info("Painting evaluation")
     stacked_image_pil = Image.fromarray(stacked_image)
     painted_img = paint_polygon_evaluation(stacked_image_pil, existing, new, missed)

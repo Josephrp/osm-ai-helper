@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+from loguru import logger
 from shapely import Polygon, box
 
 from osm_ai_helper.utils.coordinates import (
@@ -86,6 +87,7 @@ def tile_prediction(
 ):
     stacked_output = np.zeros((image.shape[0], image.shape[1]), dtype=np.uint8)
     for top, left, bottom, right in yield_tile_corners(image, TILE_SIZE, overlap):
+        logger.debug(f"Predicting {(top, left, bottom, right)}")
         tile_image = image[left:right, top:bottom].copy()
         sam_predictor.set_image(tile_image)
 
