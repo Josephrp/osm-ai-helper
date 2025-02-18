@@ -1,5 +1,4 @@
 import json
-import os
 import xml.etree.ElementTree as ET
 from contextlib import contextmanager
 from pathlib import Path
@@ -65,7 +64,7 @@ def authorize(client_id, client_secret):
 def ensure_authorized_session(client_id, client_secret):
     token_data = load_token()
 
-    osm_session = get_oauth_session(token=token_data)
+    osm_session = get_oauth_session(client_id, token=token_data)
 
     if not token_data:
         logger.info("No valid token found, starting authorization flow.")
@@ -163,11 +162,7 @@ def upload_polygon(osm_session, lon_lat_polygon, changeset):  # Pass the OAuth s
     response.raise_for_status()
 
 
-def upload(results_folder: str):
-    # Get from OSM Application registration
-    client_id = os.environ["OSM_CLIENT_ID"]
-    client_secret = os.environ["OSM_CLIENT_SECRET"]
-
+def upload(results_folder: str, client_id: str, client_secret: str):
     osm_session = ensure_authorized_session(client_id, client_secret)
 
     lon_lat_polygons = [
