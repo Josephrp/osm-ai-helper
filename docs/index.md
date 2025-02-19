@@ -1,14 +1,13 @@
-# **Welcome to the Blueprint docs**
+# **Open Street Map AI Helper Blueprint**
 
 Blueprints are customizable workflows that help developers build AI applications using open-source tools and models
 
-These docs are your companion to mastering this Blueprint.
+These docs are your companion to mastering the **OSM-AI-Helper Blueprint**.
 
 ### Built with
 - Python 3.10+
-- Tool 1
-- Tool 2
-
+- [Ultralytics](https://github.com/ultralytics/ultralytics)
+- [SAM 2](https://github.com/facebookresearch/sam2)
 
 ---
 
@@ -30,7 +29,9 @@ These docs are your companion to mastering this Blueprint.
 - **[Future Features & Contributions](future-features-contributions.md):** Learn about exciting upcoming features and how to contribute to the project.
 
 
-Have more questions? Reach out to us on [GitHub Discussions](https://github.com/mozilla-ai/osm-ai-helper/discussions).
+Have more questions? Reach out to us on Discord and we'll see how we can help:
+
+<a target="_blank" href="https://discord.gg/c3Mxff4H"><img src="https://dcbadge.limes.pink/api/server/c3Mxff4H" alt="" /></a>
 
 ---
 

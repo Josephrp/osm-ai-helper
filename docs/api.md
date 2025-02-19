@@ -1,8 +1,8 @@
 # API Reference
 
-::: osm_ai_helper.download_osm.download_osm
+::: osm_ai_helper.download_osm
 
-::: osm_ai_helper.group_elements_and_download_tiles.group_elements_and_download_tiles
+::: osm_ai_helper.group_elements_and_download_tiles
 
 
 ## utils

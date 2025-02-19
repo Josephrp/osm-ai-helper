@@ -15,7 +15,7 @@ def group_elements_and_download_tiles(
     Groups the elements by tile and downloads the satellite image corresponding to the tile.
 
     Args:
-        input_annotation_file (str): Path to the JSON file containing OSM elements.
+        elements_file (str): Path to the JSON file containing OSM elements.
             See [download_osm](osm_ai_helper.download_osm.download_osm).
         output_dir (str): Output directory.
             The images and annotations will be saved in this directory.
