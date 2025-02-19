@@ -99,13 +99,11 @@ if st_data.get("last_clicked"):
     lon = st_data["last_clicked"]["lng"]
     st.write(f"Last Clicked: {lat}, {lon}")
 
-    margin = st.slider("Margin around the point", 1, 10, 3)
-
     if st.button("Run Inference"):
         streamlit_handler = StreamlitHandler()
         logger.add(streamlit_handler, format="<level>{message}</level>")
 
-        output_path = inference(lat_lon=(lat, lon), margin=margin)
+        output_path = inference(lat_lon=(lat, lon), margin=1)
 
         for new in Path(output_path).glob("*.json"):
             handle_polygon(new)
