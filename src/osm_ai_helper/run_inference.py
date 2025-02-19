@@ -97,7 +97,7 @@ def run_inference(
             f"{output_path}/{n}.png"
         )
 
-    return existing, new, missed
+    return output_path, existing, new, missed
 
 
 if __name__ == "__main__":

@@ -1,5 +1,5 @@
 from pathlib import Path
-from shutil import move, rmtree
+from shutil import move
 
 import folium
 import streamlit as st
@@ -31,12 +31,13 @@ def inference(lat_lon, margin):
         repo_type="model",
         local_dir="models",
     )
-    run_inference(
+    output_path, *_ = run_inference(
         model_file="models/model.pt",
         output_dir="results",
         lat_lon=lat_lon,
         margin=margin,
     )
+    return output_path
 
 
 @st.fragment
@@ -54,23 +55,25 @@ def handle_polygon(polygon):
         st.image(painted_image, caption="Painted Image", use_column_width=True)
 
     if st.button("Keep Polygon", key=f"keep_{polygon}"):
-        keep_folder = Path("keep")
+        keep_folder = polygon.parent / "keep"
         keep_folder.mkdir(parents=True, exist_ok=True)
         move(polygon, keep_folder / polygon.name)
         st.success(f"Polygon moved to {keep_folder}")
     elif st.button("Discard Polygon", key=f"discard_{polygon.stem}"):
-        discard_folder = Path("discard")
+        discard_folder = polygon.parent / "discard"
         discard_folder.mkdir(parents=True, exist_ok=True)
         move(polygon, discard_folder / polygon.name)
         st.success(f"Polygon moved to {discard_folder}")
 
 
 @st.fragment
-def upload_results():
+def upload_results(output_path):
     st.divider()
     st.header("Upload all polygons in `keep`")
 
-    st.markdown("Check the docs on [How to Authorize OSM Uploads](https://mozilla-ai.github.io/osm-ai-helper/authorization)")
+    st.markdown(
+        "Check the docs on [How to Authorize OSM Uploads](https://mozilla-ai.github.io/osm-ai-helper/authorization)"
+    )
     osm_client_id = st.text_input("OSM_CLIENT_ID")
     osm_client_secret = st.text_input("OSM_CLIENT_SECRET")
     if (
@@ -78,8 +81,7 @@ def upload_results():
         and osm_client_id
         and osm_client_secret
     ):
-        upload("keep", osm_client_id, osm_client_secret)
-        rmtree("keep")
+        upload(output_path / "keep", osm_client_id, osm_client_secret)
 
 
 st.title("Open Street Map AI Helper")
@@ -103,9 +105,9 @@ if st_data.get("last_clicked"):
         streamlit_handler = StreamlitHandler()
         logger.add(streamlit_handler, format="<level>{message}</level>")
 
-        inference(lat_lon=(lat, lon), margin=margin)
+        output_path = inference(lat_lon=(lat, lon), margin=margin)
 
-        for new in Path("results").glob("**/*.json"):
+        for new in Path(output_path).glob("*.json"):
             handle_polygon(new)
 
-        upload_results()
+        upload_results(output_path)
