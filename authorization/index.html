@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../authorization/">
+        <link rel="prev" href="../getting-started/">
       
       
-        <link rel="next" href="../customization/">
+        <link rel="next" href="../step-by-step-guide/">
       
       
       <link rel="icon" href="../images/Blueprint-logo-black-flavicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Step-by-Step Guide - OpenStreetMap AI Helper</title>
+        <title>Authorization - OpenStreetMap AI Helper</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#step-by-step-guide-how-the-openstreetmap-ai-helper-blueprint-works" class="md-skip">
+        <a href="#authorization" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Step-by-Step Guide
+              Authorization
             
           </span>
         </div>
@@ -290,27 +290,6 @@
       
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../authorization/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Authorization
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
     
   
   
@@ -327,7 +306,7 @@
           
   
   <span class="md-ellipsis">
-    Step-by-Step Guide
+    Authorization
     
   </span>
   
@@ -339,7 +318,7 @@
         
   
   <span class="md-ellipsis">
-    Step-by-Step Guide
+    Authorization
     
   </span>
   
@@ -362,63 +341,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
+  <a href="#mapbox_token" class="md-nav__link">
     <span class="md-ellipsis">
-      Overview
+      MAPBOX_TOKEN
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-1-pick-a-point-in-the-map-and-download-data-around-it" class="md-nav__link">
+  <a href="#osm_client_id-and-osm_client_secret" class="md-nav__link">
     <span class="md-ellipsis">
-      Step 1: Pick a point in the map and download data around it
+      OSM_CLIENT_ID and OSM_CLIENT_SECRET
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-2-run-inference-on-the-stacked-image" class="md-nav__link">
+  <a href="#hf_token" class="md-nav__link">
     <span class="md-ellipsis">
-      Step 2: Run inference on the stacked image
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-3-find-existing-new-and-missed-polygons" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 3: Find existing, new and missed polygons
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-4-review-filter-and-upload-the-new-polygons-to-openstreetmap" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 4: Review, filter and upload the new polygons to OpenStreetMap
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#customizing-the-blueprint" class="md-nav__link">
-    <span class="md-ellipsis">
-      🎨 Customizing the Blueprint
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#contributing-to-the-blueprint" class="md-nav__link">
-    <span class="md-ellipsis">
-      🤝 Contributing to the Blueprint
+      HF_TOKEN
     </span>
   </a>
   
@@ -428,6 +371,27 @@
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../step-by-step-guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Step-by-Step Guide
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -522,63 +486,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
+  <a href="#mapbox_token" class="md-nav__link">
     <span class="md-ellipsis">
-      Overview
+      MAPBOX_TOKEN
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-1-pick-a-point-in-the-map-and-download-data-around-it" class="md-nav__link">
+  <a href="#osm_client_id-and-osm_client_secret" class="md-nav__link">
     <span class="md-ellipsis">
-      Step 1: Pick a point in the map and download data around it
+      OSM_CLIENT_ID and OSM_CLIENT_SECRET
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-2-run-inference-on-the-stacked-image" class="md-nav__link">
+  <a href="#hf_token" class="md-nav__link">
     <span class="md-ellipsis">
-      Step 2: Run inference on the stacked image
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-3-find-existing-new-and-missed-polygons" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 3: Find existing, new and missed polygons
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-4-review-filter-and-upload-the-new-polygons-to-openstreetmap" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 4: Review, filter and upload the new polygons to OpenStreetMap
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#customizing-the-blueprint" class="md-nav__link">
-    <span class="md-ellipsis">
-      🎨 Customizing the Blueprint
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#contributing-to-the-blueprint" class="md-nav__link">
-    <span class="md-ellipsis">
-      🤝 Contributing to the Blueprint
+      HF_TOKEN
     </span>
   </a>
   
@@ -603,34 +531,33 @@
   
 
 
-<h1 id="step-by-step-guide-how-the-openstreetmap-ai-helper-blueprint-works"><strong>Step-by-Step Guide: How the OpenStreetMap AI Helper Blueprint works</strong></h1>
-<p>Contributing to OpenStreetMap with the help of AI requires a model trained on an appropriate dataset.</p>
-<p>We provide tools and example notebooks to:</p>
+<h1 id="authorization">Authorization</h1>
+<p>In order to use the OpenStreetMap AI Helper Blueprint, there are a couple of authorization
+accounts you need to set up.</p>
+<h2 id="mapbox_token"><code>MAPBOX_TOKEN</code></h2>
+<p>Used to download the satellite images when <a href="https://colab.research.google.com/github/mozilla-ai/osm-ai-helper/blob/main/demo/create_dataset.ipynb">creating a dataset</a> and/or <a href="https://colab.research.google.com/github/mozilla-ai/osm-ai-helper/blob/main/demo/run_inference.ipynb">running inference</a>.</p>
+<p>You need to:</p>
 <ul>
-<li><a href="https://colab.research.google.com/github/mozilla-ai/osm-ai-helper/blob/main/demo/create_dataset.ipynb">Creating a custom dataset using ground truth data from OpenStreetMap</a></li>
-<li><a href="https://colab.research.google.com/github/mozilla-ai/osm-ai-helper/blob/main/demo/finetune_model.ipynb">Finetuning a YOLO detector using the custom dataset</a></li>
+<li>Create an account: https://console.mapbox.com/</li>
+<li>Follow this guide to obtain your <a href="https://docs.mapbox.com/help/getting-started/access-tokens/#your-default-public-token">Default Public Token</a>.</li>
 </ul>
-<p>Once you have a trained model, you can <a href="https://colab.research.google.com/github/mozilla-ai/osm-ai-helper/blob/main/demo/run_inference.ipynb">Run Inference</a> in order to find the type of elements you used to train the model (in the example, we chose swimming pools).</p>
-<h2 id="overview"><strong>Overview</strong></h2>
-<p>The inference has 4 core stages:</p>
-<h2 id="step-1-pick-a-point-in-the-map-and-download-data-around-it"><strong>Step 1: Pick a point in the map and download data around it</strong></h2>
-<p>After a point is selected, a bounding box is computed around it based on the <code>margin</code> argument.</p>
-<p>All the existing elements of interest are downloaded from <a href="https://www.openstreetmap.org">OpenStreetMap</a> using <a href="../api/#osm_ai_helper.utils.osm.get_elements"><code>get_elements</code></a>.</p>
-<p>All the tiles are downloaded from <a href="https://www.mapbox.com/">MapBox</a> using <a href="../api/#osm_ai_helper.utils.inference.download_stacked_image_and_mask"><code>download_stacked_image_and_mask</code></a>. The elements are grouped and converted to a <code>ground truth mask</code> for later usage.</p>
-<h2 id="step-2-run-inference-on-the-stacked-image"><strong>Step 2: Run inference on the stacked image</strong></h2>
-<p>The stacked image is divided into tiles to run inference using <a href="../api/#osm_ai_helper.utils.inference.tile_prediction"><code>tile_prediction</code></a> .</p>
-<p>For each tile, we run the trained <a href="https://docs.ultralytics.com/tasks/detect/">YOLO detector</a>.</p>
-<p>If an object of interest is detected, we pass the bounding box to the provided <a href="https://github.com/facebookresearch/sam2">SAM2 model</a> to obtain a segmentation mask.</p>
-<p>All the predictions are aggregated into a single <code>stacked output mask</code>.</p>
-<h2 id="step-3-find-existing-new-and-missed-polygons"><strong>Step 3: Find existing, new and missed polygons</strong></h2>
-<p>All the individual mask blobs are converted to polygons for both the <code>stacked output mask</code> and the <code>ground truth mask</code>.
-Based on overlap, all the polygons are categorized into <code>existing</code>, <code>new</code> or <code>missed</code>.</p>
-<h2 id="step-4-review-filter-and-upload-the-new-polygons-to-openstreetmap"><strong>Step 4: Review, filter and upload the <code>new</code> polygons to OpenStreetMap</strong></h2>
-<p>The <code>new</code> polygons can be manually reviewed, filtered, and then uploaded to OpenStreetMap using <a href="../api/#osm_ai_helper.upload_osm.upload_osm"><code>upload_osm</code></a>.</p>
-<h2 id="customizing-the-blueprint">🎨 <strong>Customizing the Blueprint</strong></h2>
-<p>To better understand how you can tailor this Blueprint to suit your specific needs, please visit the <strong><a href="../customization/">Customization Guide</a></strong>.</p>
-<h2 id="contributing-to-the-blueprint">🤝 <strong>Contributing to the Blueprint</strong></h2>
-<p>Want to help improve or extend this Blueprint? Check out the <strong><a href="../future-features-contributions/">Future Features &amp; Contributions Guide</a></strong> to see how you can contribute your ideas, code, or feedback to make this Blueprint even better!</p>
+<h2 id="osm_client_id-and-osm_client_secret"><code>OSM_CLIENT_ID</code> and <code>OSM_CLIENT_SECRET</code></h2>
+<p>Used to upload the results after <a href="https://colab.research.google.com/github/mozilla-ai/osm-ai-helper/blob/main/demo/run_inference.ipynb">running inference</a> to the OpenStreetMap database.</p>
+<p>You need to:</p>
+<ul>
+<li>Create an account: https://www.openstreetmap.org/user/new</li>
+<li>Register a new OAuth2 application: https://www.openstreetmap.org/oauth2/applications/new
+    Grant <code>Modify the map (write_api)</code>.
+    Set the redirect URL to <code>https://127.0.0.1:8000</code>.</li>
+<li>Copy and save the <code>Client ID</code> and <code>Client Secret</code>.</li>
+</ul>
+<h2 id="hf_token"><code>HF_TOKEN</code></h2>
+<p>Only needed if you are <a href="https://colab.research.google.com/github/mozilla-ai/osm-ai-helper/blob/main/demo/create_dataset.ipynb">Creating a Dataset</a> and/or <a href="https://colab.research.google.com/github/mozilla-ai/osm-ai-helper/blob/main/demo/finetune_model.ipynb">Finetuning a Model</a> in order to upload the results to the <a href="https://huggingface.co/docs/hub/index">HuggingFace Hub</a>.</p>
+<p>You need to:</p>
+<ul>
+<li>Create an account: https://huggingface.co/join</li>
+<li>Follow this guide about <a href="https://huggingface.co/docs/hub/security-tokens"><code>User Access Tokens</code></a></li>
+</ul>
 
 
 
