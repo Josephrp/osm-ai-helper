@@ -20,7 +20,7 @@
     
     
       
-        <title>Customization - OpenStreetMap AI Helper</title>
+        <title>Customization Guide - Guidance Docs</title>
       
     
     
@@ -90,7 +90,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="OpenStreetMap AI Helper" class="md-header__button md-logo" aria-label="OpenStreetMap AI Helper" data-md-component="logo">
+    <a href=".." title="Guidance Docs" class="md-header__button md-logo" aria-label="Guidance Docs" data-md-component="logo">
       
   <img src="../images/Blueprint-logo-white.png" alt="logo">
 
@@ -103,13 +103,13 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            OpenStreetMap AI Helper
+            Guidance Docs
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Customization
+              Customization Guide
             
           </span>
         </div>
@@ -222,12 +222,12 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="OpenStreetMap AI Helper" class="md-nav__button md-logo" aria-label="OpenStreetMap AI Helper" data-md-component="logo">
+    <a href=".." title="Guidance Docs" class="md-nav__button md-logo" aria-label="Guidance Docs" data-md-component="logo">
       
   <img src="../images/Blueprint-logo-white.png" alt="logo">
 
     </a>
-    OpenStreetMap AI Helper
+    Guidance Docs
   </label>
   
     <div class="md-nav__source">
@@ -293,27 +293,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../authorization/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Authorization
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../step-by-step-guide/" class="md-nav__link">
         
   
@@ -348,7 +327,7 @@
           
   
   <span class="md-ellipsis">
-    Customization
+    Customization Guide
     
   </span>
   
@@ -360,7 +339,7 @@
         
   
   <span class="md-ellipsis">
-    Customization
+    Customization Guide
     
   </span>
   
@@ -386,6 +365,24 @@
   <a href="#changing-the-model" class="md-nav__link">
     <span class="md-ellipsis">
       🧠 Changing the Model
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modifying-the-system-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 Modifying the system Prompt
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-customization-ideas" class="md-nav__link">
+    <span class="md-ellipsis">
+      💡 Other Customization Ideas
     </span>
   </a>
   
@@ -486,6 +483,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#modifying-the-system-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 Modifying the system Prompt
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-customization-ideas" class="md-nav__link">
+    <span class="md-ellipsis">
+      💡 Other Customization Ideas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#contributing-to-the-blueprint" class="md-nav__link">
     <span class="md-ellipsis">
       🤝 Contributing to the Blueprint
@@ -514,19 +529,13 @@
 
 
 <h1 id="customization-guide">🎨 <strong>Customization Guide</strong></h1>
-<p>This OpenStreetMap AI Helper Blueprint is designed to be flexible and easily adaptable to your specific needs. This guide will walk you through some key areas you can customize to make the Blueprint your own.</p>
+<p>This Blueprint is designed to be flexible and easily adaptable to your specific needs. This guide will walk you through some key areas you can customize to make the Blueprint your own.</p>
 <hr />
 <h2 id="changing-the-model">🧠 <strong>Changing the Model</strong></h2>
-<p>The default provided model is trained to detect swimming pools.</p>
-<p>You can follow the <a href="https://colab.research.google.com/github/mozilla-ai/osm-ai-helper/blob/main/demo/create_dataset.ipynb">Create Dataset</a> and <a href="https://colab.research.google.com/github/mozilla-ai/osm-ai-helper/blob/main/demo/finetune_model.ipynb">Finetune Model</a>.</p>
-<p>When creating the dataset, you need to pick:</p>
+<h2 id="modifying-the-system-prompt">📝 <strong>Modifying the system Prompt</strong></h2>
+<h2 id="other-customization-ideas">💡 Other Customization Ideas</h2>
 <ul>
-<li>A <code>selector</code> based on <a href="https://wiki.openstreetmap.org/wiki/Map_features">OpenStreetMap tags</a>.
-    The example uses <a href="https://wiki.openstreetmap.org/wiki/Tag:leisure=swimming_pool"><code>leisure=swimming_pool</code></a>.
-    Try to pick elements that can be clearly delimited with a polygon and are easy to distinguish in the satellite images.
-    A similar example would be a tenis court <code>leisure=pitch + sport=tennis</code>.</li>
-<li>An appropriate <a href="https://docs.mapbox.com/help/glossary/zoom-level/"><code>zoom</code> level</a> (the example uses <code>18</code>).
-    There is a tradeoff between easier detection (higher zoom levels) and covering a wider area on each tile (lower zoom levels).</li>
+<li>other ideas..</li>
 </ul>
 <h2 id="contributing-to-the-blueprint">🤝 <strong>Contributing to the Blueprint</strong></h2>
 <p>Want to help improve or extend this Blueprint? Check out the <strong><a href="../future-features-contributions/">Future Features &amp; Contributions Guide</a></strong> to see how you can contribute your ideas, code, or feedback to make this Blueprint even better!</p>
