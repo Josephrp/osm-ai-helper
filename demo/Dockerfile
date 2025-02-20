@@ -19,6 +19,7 @@ ENV HOME=/home/user \
 WORKDIR $HOME/app
 
 RUN pip3 install git+https://github.com/mozilla-ai/osm-ai-helper.git
+RUN pip3 install folium streamlit streamlit-folium
 
 COPY --chown=user . $HOME/app
 
