@@ -66,6 +66,7 @@ def handle_polygon(polygon):
         move(polygon, discard_folder / polygon.name)
         st.success(f"Polygon moved to {discard_folder}")
 
+
 @st.fragment
 def upload_results(output_path):
     st.divider()
@@ -78,18 +79,16 @@ def upload_results(output_path):
         " to contribute with your own OpenStreetMap account."
     )
     contributor = st.text_input("(Optional) Indicate your name for attribution")
-    if (
-        st.button("Upload all polygons in `keep`")
-    ):
+    if st.button("Upload all polygons in `keep`"):
         if contributor:
             comment = f"Add Swimming Pools. Contributed by {contributor}"
         else:
             comment = "Add Swimming Pools"
         upload_osm(
-            results_dir=output_path / "keep", 
-            client_id=os.environ["OSM_CLIENT_ID"], 
+            results_dir=output_path / "keep",
+            client_id=os.environ["OSM_CLIENT_ID"],
             client_secret=os.environ["OSM_CLIENT_SECRET"],
-            comment=comment
+            comment=comment,
         )
 
 

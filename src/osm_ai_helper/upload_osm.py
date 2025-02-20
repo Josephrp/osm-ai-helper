@@ -162,7 +162,12 @@ def upload_polygon(osm_session, lon_lat_polygon, changeset):  # Pass the OAuth s
     response.raise_for_status()
 
 
-def upload_osm(results_dir: str, client_id: str, client_secret: str, comment: str = "Add Swimming Pools"):
+def upload_osm(
+    results_dir: str,
+    client_id: str,
+    client_secret: str,
+    comment: str = "Add Swimming Pools",
+):
     """
     Upload the results to OpenStreetMap.
 
