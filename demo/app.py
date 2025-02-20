@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from shutil import move
 
@@ -9,7 +10,7 @@ from PIL import Image
 from streamlit_folium import st_folium
 
 from osm_ai_helper.run_inference import run_inference
-from osm_ai_helper.upload_osm import upload
+from osm_ai_helper.upload_osm import upload_osm
 
 
 class StreamlitHandler:
@@ -65,23 +66,31 @@ def handle_polygon(polygon):
         move(polygon, discard_folder / polygon.name)
         st.success(f"Polygon moved to {discard_folder}")
 
-
 @st.fragment
 def upload_results(output_path):
     st.divider()
     st.header("Upload all polygons in `keep`")
 
     st.markdown(
-        "Check the docs on [How to Authorize OSM Uploads](https://mozilla-ai.github.io/osm-ai-helper/authorization)"
+        "The results will be uploaded using our OpenStreetMap account."
+        "You can check the [Colab Notebook](ttps://colab.research.google.com/github/mozilla-ai/osm-ai-helper/blob/main/demo/run_inference.ipynb)"
+        " and the [Authorization Guide](https://mozilla-ai.github.io/osm-ai-helper/authorization)"
+        " to contribute with your own OpenStreetMap account."
     )
-    osm_client_id = st.text_input("OSM_CLIENT_ID")
-    osm_client_secret = st.text_input("OSM_CLIENT_SECRET")
+    contributor = st.text_input("(Optional) Indicate your name for attribution")
     if (
         st.button("Upload all polygons in `keep`")
-        and osm_client_id
-        and osm_client_secret
     ):
-        upload(output_path / "keep", osm_client_id, osm_client_secret)
+        if contributor:
+            comment = f"Add Swimming Pools. Contributed by {contributor}"
+        else:
+            comment = "Add Swimming Pools"
+        upload_osm(
+            results_dir=output_path / "keep", 
+            client_id=os.environ["OSM_CLIENT_ID"], 
+            client_secret=os.environ["OSM_CLIENT_SECRET"],
+            comment=comment
+        )
 
 
 st.title("Open Street Map AI Helper")

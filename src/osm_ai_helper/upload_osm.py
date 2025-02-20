@@ -162,17 +162,29 @@ def upload_polygon(osm_session, lon_lat_polygon, changeset):  # Pass the OAuth s
     response.raise_for_status()
 
 
-def upload(results_folder: str, client_id: str, client_secret: str):
+def upload_osm(results_dir: str, client_id: str, client_secret: str, comment: str = "Add Swimming Pools"):
+    """
+    Upload the results to OpenStreetMap.
+
+    Args:
+        results_dir (str): Directory containing the results.
+            The results should be in the format of `*.json` files.
+            See [`run_inference`][osm_ai_helper.run_inference.run_inference].
+        client_id (str): OpenStreetMap Oauth client ID.
+        client_secret (str): OpenStreetMap Oauth client secret.
+        comment (str, optional): Comment to add to the changeset.
+            Defaults to "Add Swimming Pools".
+    """
     osm_session = ensure_authorized_session(client_id, client_secret)
 
     lon_lat_polygons = [
-        json.loads(result.read_text()) for result in Path(results_folder).glob("*.json")
+        json.loads(result.read_text()) for result in Path(results_dir).glob("*.json")
     ]
 
-    with open_changeset(osm_session) as changeset:
+    with open_changeset(osm_session, comment=comment) as changeset:
         for lon_lat_polygon in lon_lat_polygons:
             upload_polygon(osm_session, lon_lat_polygon, changeset)
 
 
 if __name__ == "__main__":
-    Fire(upload)
+    Fire(upload_osm)
