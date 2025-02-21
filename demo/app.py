@@ -32,13 +32,13 @@ def inference(lat_lon, margin):
         repo_type="model",
         local_dir="models",
     )
-    output_path, *_ = run_inference(
+    output_path, existing, new, missed = run_inference(
         model_file="models/model.pt",
         output_dir="results",
         lat_lon=lat_lon,
         margin=margin,
     )
-    return output_path
+    return output_path, new
 
 
 @st.fragment
@@ -111,9 +111,13 @@ if st_data.get("last_clicked"):
         streamlit_handler = StreamlitHandler()
         logger.add(streamlit_handler, format="<level>{message}</level>")
 
-        output_path = inference(lat_lon=(lat, lon), margin=1)
+        output_path, new = inference(lat_lon=(lat, lon), margin=1)
 
-        for new in Path(output_path).glob("*.json"):
-            handle_polygon(new)
+        if new:
+            st.divider()
+            st.header("Review `new` polygons")
+            for new in Path(output_path).glob("*.json"):
+                handle_polygon(new)
 
-        upload_results(output_path)
+            if list(Path(output_path / "keep").iterdir()):
+                upload_results(output_path)
