@@ -111,7 +111,7 @@ if st_data.get("last_clicked"):
         streamlit_handler = StreamlitHandler()
         logger.add(streamlit_handler, format="<level>{message}</level>")
 
-        output_path, new = inference(lat_lon=(lat, lon), margin=1)
+        output_path, new = inference(lat_lon=(lat, lon), margin=3)
 
         if new:
             st.divider()
