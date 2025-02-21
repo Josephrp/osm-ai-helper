@@ -193,6 +193,8 @@ def upload_osm(
     with open_changeset(osm_session, comment=comment) as changeset:
         for lon_lat_polygon in lon_lat_polygons:
             upload_polygon(osm_session, lon_lat_polygon, changeset)
+        
+        return changeset
 
 
 if __name__ == "__main__":

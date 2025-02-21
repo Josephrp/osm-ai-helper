@@ -51,9 +51,9 @@ def handle_polygon(polygon):
     col1, col2 = st.columns(2)
 
     with col1:
-        st.image(raw_image, caption="Raw Image", use_column_width=True)
+        st.image(raw_image, caption="Raw Image", use_container_width=True)
     with col2:
-        st.image(painted_image, caption="Painted Image", use_column_width=True)
+        st.image(painted_image, caption="Painted Image", use_container_width=True)
 
     if st.button("Keep Polygon", key=f"keep_{polygon}"):
         keep_folder = polygon.parent / "keep"
@@ -72,9 +72,8 @@ def upload_results(output_path):
     st.divider()
     st.header("Upload all polygons in `keep`")
 
-    st.markdown(
-        "The results will be uploaded using our OpenStreetMap account."
-        "You can check the [Colab Notebook](ttps://colab.research.google.com/github/mozilla-ai/osm-ai-helper/blob/main/demo/run_inference.ipynb)"
+    st.markdown("The results will be uploaded using our OpenStreetMap account.")
+    st.markdown("You can check the [Colab Notebook](ttps://colab.research.google.com/github/mozilla-ai/osm-ai-helper/blob/main/demo/run_inference.ipynb)"
         " and the [Authorization Guide](https://mozilla-ai.github.io/osm-ai-helper/authorization)"
         " to contribute with your own OpenStreetMap account."
     )
@@ -84,12 +83,13 @@ def upload_results(output_path):
             comment = f"Add Swimming Pools. Contributed by {contributor}"
         else:
             comment = "Add Swimming Pools"
-        upload_osm(
+        changeset = upload_osm(
             results_dir=output_path / "keep",
             client_id=os.environ["OSM_CLIENT_ID"],
             client_secret=os.environ["OSM_CLIENT_SECRET"],
             comment=comment,
         )
+        st.success(f"Changeset created: https://www.openstreetmap.org/changeset/{changeset}")
 
 
 st.title("Open Street Map AI Helper")
