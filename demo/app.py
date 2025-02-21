@@ -26,18 +26,20 @@ class StreamlitHandler:
 
 @st.fragment
 def inference(lat_lon, margin):
-    hf_hub_download(
-        "daavoo/yolo-osm-pool-detector",
-        filename="model.pt",
-        repo_type="model",
-        local_dir="models",
-    )
-    output_path, existing, new, missed = run_inference(
-        model_file="models/model.pt",
-        output_dir="results",
-        lat_lon=lat_lon,
-        margin=margin,
-    )
+    with st.spinner("Downloading model..."):
+        hf_hub_download(
+            "daavoo/yolo-osm-pool-detector",
+            filename="model.pt",
+            repo_type="model",
+            local_dir="models",
+        )
+    with st.spinner("Running inference..."):
+        output_path, existing, new, missed = run_inference(
+            model_file="models/model.pt",
+            output_dir="results",
+            lat_lon=lat_lon,
+            margin=margin,
+        )
     return output_path, new
 
 
@@ -64,7 +66,7 @@ def handle_polygon(polygon):
         discard_folder = polygon.parent / "discard"
         discard_folder.mkdir(parents=True, exist_ok=True)
         move(polygon, discard_folder / polygon.name)
-        st.success(f"Polygon moved to {discard_folder}")
+        st.warning(f"Polygon moved to {discard_folder}")
 
 
 @st.fragment
@@ -73,7 +75,8 @@ def upload_results(output_path):
     st.header("Upload all polygons in `keep`")
 
     st.markdown("The results will be uploaded using our OpenStreetMap account.")
-    st.markdown("You can check the [Colab Notebook](ttps://colab.research.google.com/github/mozilla-ai/osm-ai-helper/blob/main/demo/run_inference.ipynb)"
+    st.markdown(
+        "You can check the [Colab Notebook](ttps://colab.research.google.com/github/mozilla-ai/osm-ai-helper/blob/main/demo/run_inference.ipynb)"
         " and the [Authorization Guide](https://mozilla-ai.github.io/osm-ai-helper/authorization)"
         " to contribute with your own OpenStreetMap account."
     )
@@ -89,7 +92,9 @@ def upload_results(output_path):
             client_secret=os.environ["OSM_CLIENT_SECRET"],
             comment=comment,
         )
-        st.success(f"Changeset created: https://www.openstreetmap.org/changeset/{changeset}")
+        st.success(
+            f"Changeset created: https://www.openstreetmap.org/changeset/{changeset}"
+        )
 
 
 st.title("Open Street Map AI Helper")
