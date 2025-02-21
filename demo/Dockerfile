@@ -2,6 +2,7 @@ FROM nvidia/cuda:12.2.2-cudnn8-devel-ubuntu22.04
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
   libgl1 \
+  libglib2.0-0 \
   build-essential \
   python3.10 \
   python3.10-dev \
