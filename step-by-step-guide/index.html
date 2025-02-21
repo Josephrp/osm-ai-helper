@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../authorization/">
+        <link rel="prev" href="../getting-started/">
       
       
-        <link rel="next" href="../customization/">
+        <link rel="next" href="../authorization/">
       
       
       <link rel="icon" href="../images/Blueprint-logo-black-flavicon.png">
@@ -290,27 +290,6 @@
       
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../authorization/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Authorization
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
     
   
   
@@ -428,6 +407,27 @@
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../authorization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Authorization
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -614,11 +614,13 @@
 <h2 id="overview"><strong>Overview</strong></h2>
 <p>The inference has 4 core stages:</p>
 <h2 id="step-1-pick-a-point-in-the-map-and-download-data-around-it"><strong>Step 1: Pick a point in the map and download data around it</strong></h2>
+<p><img alt="Lat Lon Point" src="../images/lat-lon-point.png" /></p>
 <p>After a point is selected, a bounding box is computed around it based on the <code>margin</code> argument.</p>
 <p>All the existing elements of interest are downloaded from <a href="https://www.openstreetmap.org">OpenStreetMap</a> using <a href="../api/#osm_ai_helper.utils.osm.get_elements"><code>get_elements</code></a>.</p>
-<p>All the tiles are downloaded from <a href="https://www.mapbox.com/">MapBox</a> using <a href="../api/#osm_ai_helper.utils.inference.download_stacked_image_and_mask"><code>download_stacked_image_and_mask</code></a>. The elements are grouped and converted to a <code>ground truth mask</code> for later usage.</p>
+<p>All the tiles are downloaded from <a href="https://www.mapbox.com/">MapBox</a> and joined to create a <code>stacked image</code> using <a href="../api/#osm_ai_helper.utils.inference.download_stacked_image_and_mask"><code>download_stacked_image_and_mask</code></a>. The elements are grouped and converted to a <code>ground truth mask</code> for later usage.</p>
+<p><img alt="Stacked Image" src="../images/stacked-image.png" /></p>
 <h2 id="step-2-run-inference-on-the-stacked-image"><strong>Step 2: Run inference on the stacked image</strong></h2>
-<p>The stacked image is divided into tiles to run inference using <a href="../api/#osm_ai_helper.utils.inference.tile_prediction"><code>tile_prediction</code></a> .</p>
+<p>The stacked image is divided into tiles to run inference using <a href="../api/#osm_ai_helper.utils.inference.tile_prediction"><code>tile_prediction</code></a>.</p>
 <p>For each tile, we run the trained <a href="https://docs.ultralytics.com/tasks/detect/">YOLO detector</a>.</p>
 <p>If an object of interest is detected, we pass the bounding box to the provided <a href="https://github.com/facebookresearch/sam2">SAM2 model</a> to obtain a segmentation mask.</p>
 <p>All the predictions are aggregated into a single <code>stacked output mask</code>.</p>
@@ -626,7 +628,10 @@
 <p>All the individual mask blobs are converted to polygons for both the <code>stacked output mask</code> and the <code>ground truth mask</code>.
 Based on overlap, all the polygons are categorized into <code>existing</code>, <code>new</code> or <code>missed</code>.</p>
 <h2 id="step-4-review-filter-and-upload-the-new-polygons-to-openstreetmap"><strong>Step 4: Review, filter and upload the <code>new</code> polygons to OpenStreetMap</strong></h2>
-<p>The <code>new</code> polygons can be manually reviewed, filtered, and then uploaded to OpenStreetMap using <a href="../api/#osm_ai_helper.upload_osm.upload_osm"><code>upload_osm</code></a>.</p>
+<p>The <code>new</code> polygons can be manually reviewed and filtered:</p>
+<p><img alt="Filter Polygons" src="../images/filter-polygons.png" /></p>
+<p>The ones you chose to <code>keep</code> will be uploaded to OpenStreetMap using <a href="../api/#osm_ai_helper.upload_osm.upload_osm"><code>upload_osm</code></a>:</p>
+<p><img alt="Polygon Uploaded" src="../images/polygon-uploaded.png" /></p>
 <h2 id="customizing-the-blueprint">🎨 <strong>Customizing the Blueprint</strong></h2>
 <p>To better understand how you can tailor this Blueprint to suit your specific needs, please visit the <strong><a href="../customization/">Customization Guide</a></strong>.</p>
 <h2 id="contributing-to-the-blueprint">🤝 <strong>Contributing to the Blueprint</strong></h2>
