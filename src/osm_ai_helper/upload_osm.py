@@ -31,6 +31,9 @@ def fetch_token(session, authorization_response, client_secret):
 
 def load_token():
     try:
+        if "OSM_TOKEN_JSON" in os.environ:
+            token = json.loads(os.environ["OSM_TOKEN_JSON"])
+            return token
         with open(TOKEN_FILE, "r") as f:
             token = json.load(f)
             logger.info(f"Token loaded from {TOKEN_FILE}")
