@@ -119,5 +119,4 @@ if st_data.get("last_clicked"):
             for new in Path(output_path).glob("*.json"):
                 handle_polygon(new)
 
-            if list(Path(output_path / "keep").iterdir()):
-                upload_results(output_path)
+            upload_results(output_path)
