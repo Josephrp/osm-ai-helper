@@ -77,7 +77,7 @@ def polygon_evaluation(
     mask_true: np.ndarray,
     mask_pred: np.ndarray,
     min_area: int = 50,
-    min_iou: float = 0.7,
+    min_iou: float = 0.2,
     simplify: float = 2.0,
 ) -> Tuple[List[Polygon], List[Polygon], List[Polygon]]:
     true_polygons = mask_to_polygons(mask_true)
