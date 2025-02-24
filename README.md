@@ -9,12 +9,14 @@
   </picture>
 </p>
 
-# OSM-AI-helper: a Blueprint by Mozilla.ai for contributing to Open Street Map with the help of AI
+# OSM-AI-helper: a Blueprint by Mozilla.ai for contributing to OpenStreetMap with the help of AI
 
 [![](https://dcbadge.limes.pink/api/server/YuMNeuKStr?style=flat)](https://discord.gg/YuMNeuKStr)
 [![Docs](https://github.com/mozilla-ai/osm-ai-helper/actions/workflows/docs.yaml/badge.svg)](https://github.com/mozilla-ai/osm-ai-helper/actions/workflows/docs.yaml/)
 [![Tests](https://github.com/mozilla-ai/osm-ai-helper/actions/workflows/tests.yaml/badge.svg)](https://github.com/mozilla-ai/osm-ai-helper/actions/workflows/tests.yaml/)
 [![Ruff](https://github.com/mozilla-ai/osm-ai-helper/actions/workflows/lint.yaml/badge.svg?label=Ruff)](https://github.com/mozilla-ai/osm-ai-helper/actions/workflows/lint.yaml/)
+
+<img src="./images/osm-ai-helper-diagram.png" width="800" alt="osm-ai-helper Diagram" />
 
 📘 To explore this project further and discover other Blueprints, visit the [**Blueprints Hub**](https://developer-hub.mozilla.ai/).
 
@@ -22,18 +24,16 @@
 
 ### Built with
 
-- Python 3.10+
-- [Ultralytics](https://github.com/ultralytics/ultralytics)
-- [SAM 2](https://github.com/facebookresearch/sam2)
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue) [![Ultralytics](https://img.shields.io/badge/Ultralytics-008080?logo=ultralytics&logoColor=white)](https://ultralytics.com/) [![SAM 2](https://img.shields.io/badge/SAM%202-0099FF?logo=meta&logoColor=white)](https://segment-anything.com/)
 
 
 ## Quick-start
 
-Get started right away finding swimming pools and contributing them to Open Street Map:
+Get started right away finding swimming pools and contributing them to OpenStreetMap:
 
-| Find Swimming Pools |
-| ------------------- |
-| [![Run Inference](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mozilla-ai/osm-ai-helper/blob/main/demo/run_inference.ipynb)
+| Google Colab | HuggingFace Spaces  | GitHub Codespaces |
+| -------------| ------------------- | ----------------- |
+| [![Run Inference](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mozilla-ai/osm-ai-helper/blob/main/demo/run_inference.ipynb) | [![Try on Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Try%20on-Spaces-blue)](https://huggingface.co/spaces/mozilla-ai/osm-ai-helper) | [![Try on Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=928839264&skip_quickstart=true&machine=standardLinux32gb) |
 
 You can also create your own dataset and finetune a new model for a different use case:
 

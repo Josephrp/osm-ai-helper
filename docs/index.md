@@ -1,13 +1,12 @@
-# **Open Street Map AI Helper Blueprint**
+# **OpenStreetMap AI Helper Blueprint**
 
 Blueprints are customizable workflows that help developers build AI applications using open-source tools and models
 
-These docs are your companion to mastering the **OSM-AI-Helper Blueprint**.
+These docs are your companion to mastering the **OpenStreetMap AI Helper Blueprint**.
 
 ### Built with
-- Python 3.10+
-- [Ultralytics](https://github.com/ultralytics/ultralytics)
-- [SAM 2](https://github.com/facebookresearch/sam2)
+
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue) [![Ultralytics](https://img.shields.io/badge/Ultralytics-008080?logo=ultralytics&logoColor=white)](https://ultralytics.com/) [![SAM 2](https://img.shields.io/badge/SAM%202-0099FF?logo=meta&logoColor=white)](https://segment-anything.com/)
 
 ---
 
@@ -31,7 +30,7 @@ These docs are your companion to mastering the **OSM-AI-Helper Blueprint**.
 
 Have more questions? Reach out to us on Discord and we'll see how we can help:
 
-<a target="_blank" href="https://discord.gg/c3Mxff4H"><img src="https://dcbadge.limes.pink/api/server/c3Mxff4H" alt="" /></a>
+<a target="_blank" href="https://discord.gg/gazz5XDU"><img src="https://dcbadge.limes.pink/api/server/gazz5XDU" alt="" /></a>
 
 ---
 

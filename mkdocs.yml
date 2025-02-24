@@ -1,4 +1,4 @@
-site_name: Guidance Docs
+site_name: OpenStreetMap AI Helper
 repo_url: https://github.com/mozilla-ai/osm-ai-helper
 repo_name: osm-ai-helper
 
@@ -6,7 +6,8 @@ nav:
   - Home: index.md
   - Getting Started: getting-started.md
   - Step-by-Step Guide: step-by-step-guide.md
-  - Customization Guide: customization.md
+  - Authorization: authorization.md
+  - Customization: customization.md
   - API Reference: api.md
   - Future Features & Contributions: future-features-contributions.md
 
@@ -32,6 +33,7 @@ theme:
     - content.tabs.link
 
 markdown_extensions:
+  - admonition
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
@@ -39,6 +41,8 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
 
 plugins:
 - search
