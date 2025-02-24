@@ -116,6 +116,8 @@ def upload_results(output_path):
             comment = f"Add Swimming Pools. Contributed by {contributor}"
         else:
             comment = "Add Swimming Pools"
+        logger.add(StreamlitHandler(), format="<level>{message}</level>")
+
         changeset = upload_osm(
             results_dir=output_path / "keep",
             client_id=os.environ["OSM_CLIENT_ID"],
@@ -157,8 +159,6 @@ if st.button("Run Inference") and lat_lon:
         )
         for new in Path(output_path).glob("*.json"):
             handle_polygon(new)
-
-        logger.add(StreamlitHandler(), format="<level>{message}</level>")
 
         upload_results(output_path)
     else:
