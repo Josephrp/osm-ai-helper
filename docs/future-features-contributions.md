@@ -13,7 +13,7 @@ This Blueprint is an evolving project designed to grow with the help of the open
 
 ### 🎨 **Extensibility Ideas**
 
-This Blueprint is designed to be a foundation you can build upon. By extending its capabilities, you can open the door to new applications, improve user experience, and adapt the Blueprint to address other use cases. 
+This Blueprint is designed to be a foundation you can build upon. By extending its capabilities, you can open the door to new applications, improve user experience, and adapt the Blueprint to address other use cases.
 
 We'd love to see how you can enhance this Blueprint! If you create improvements or extend its capabilities, consider contributing them back to the project so others in the community can benefit from your work. Check out our [Contributions Guide](https://github.com/mozilla-ai/osm-ai-helper/blob/main/CONTRIBUTING.md) to get started!
 
