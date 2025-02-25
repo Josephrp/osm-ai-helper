@@ -9,7 +9,7 @@
   </picture>
 </p>
 
-# OSM-AI-helper: a Blueprint by Mozilla.ai for contributing to OpenStreetMap with the help of AI
+# OSM-AI-helper: a Blueprint by Mozilla.ai for mapping Features in OpenStreetMap with Computer Vision
 
 [![](https://dcbadge.limes.pink/api/server/YuMNeuKStr?style=flat)](https://discord.gg/YuMNeuKStr)
 [![Docs](https://github.com/mozilla-ai/osm-ai-helper/actions/workflows/docs.yaml/badge.svg)](https://github.com/mozilla-ai/osm-ai-helper/actions/workflows/docs.yaml/)
