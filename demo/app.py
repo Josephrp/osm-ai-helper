@@ -58,7 +58,7 @@ def show_map():
 def inference(lat_lon, margin):
     with st.spinner("Downloading model..."):
         hf_hub_download(
-            "daavoo/yolo-osm-pool-detector",
+            "mozilla-ai/swimming-pool-detector",
             filename="model.pt",
             repo_type="model",
             local_dir="models",
