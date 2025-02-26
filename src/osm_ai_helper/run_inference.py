@@ -35,7 +35,7 @@ def run_inference(
     output_dir: str,
     lat_lon: Tuple[float, float],
     margin: int = 1,
-    sam_model: str = "facebook/sam2-hiera-small",
+    sam_model: str = "facebook/sam2.1-hiera-small",
     selector: str = "leisure=swimming_pool",
     zoom: int = 18,
 ):
@@ -52,7 +52,7 @@ def run_inference(
         margin (int, optional): Number of tiles around the location.
             Defaults to 1.
         sam_model (str, optional): [SAM2](https://github.com/facebookresearch/sam2) model to use.
-            Defaults to "facebook/sam2-hiera-small".
+            Defaults to "facebook/sam2.1-hiera-small".
         selector (str, optional): OpenStreetMap selector.
             Defaults to "leisure=swimming_pool".
         zoom (int, optional): Zoom level.
