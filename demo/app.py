@@ -36,7 +36,7 @@ def show_map():
             super().__init__()
             self._name = "LatLngPopup"
 
-    m = folium.Map(location=[42.2489, -8.5117], zoom_start=11, tiles="OpenStreetMap")
+    m = folium.Map(location=[42.8075, -8.1519], zoom_start=8, tiles="OpenStreetMap")
     m.add_child(LatLngPopup())
 
     st_folium(m, height=400, width=800)
