@@ -54,7 +54,7 @@ def inference(lat_lon, margin):
     with st.spinner("Running inference..."):
         output_path, existing, new, missed = run_inference(
             yolo_model_file="models/model.pt",
-            output_dir="results",
+            output_dir="/tmp/results",
             lat_lon=lat_lon,
             margin=margin,
         )
