@@ -138,10 +138,15 @@ def tile_prediction(
             if len(bbox.boxes.xyxy) == 0:
                 continue
 
+            bbox_int = list(int(x) for x in bbox.boxes.xyxy[0])
+
+            bbox_int[0] = max(0, bbox_int[0] - 5)
+            bbox_int[1] = max(0, bbox_int[1] - 5)
+            bbox_int[2] = min(512, bbox_int[2] + 5)
+            bbox_int[3] = min(512, bbox_int[3] + 5)
+
             masks, *_ = sam_predictor.predict(
-                point_coords=None,
-                point_labels=None,
-                box=[list(int(x) for x in bbox.boxes.xyxy[0])],
+                box=[bbox_int],
                 multimask_output=False,
             )
 
