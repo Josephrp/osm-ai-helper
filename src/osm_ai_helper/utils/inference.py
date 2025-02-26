@@ -110,7 +110,8 @@ def tile_prediction(
     sam_predictor: SAM2ImagePredictor,
     image: np.ndarray,
     overlap: float = 0.125,
-    pad_bbox: int = 0,
+    bbox_conf: float = 0.4,
+    bbox_pad: int = 0,
 ) -> np.ndarray:
     """
     Predict on a large image by splitting it into tiles.
@@ -123,7 +124,9 @@ def tile_prediction(
         image (np.ndarray): Image to predict on.
         overlap (float): Overlap between tiles.
             Defaults to 0.125.
-        pad_bbox (int): Padding to be added to the predicted bbox.
+        bbox_conf (float): Sets the minimum confidence threshold for detections.
+            Defaults to 0.4.
+        bbox_pad (int): Padding to be added to the predicted bbox.
             Defaults to 0.
 
     Returns:
@@ -135,7 +138,7 @@ def tile_prediction(
         tile_image = image[left:right, top:bottom].copy()
         sam_predictor.set_image(tile_image)
 
-        bbox_result = bbox_predictor.predict(tile_image, verbose=False)
+        bbox_result = bbox_predictor.predict(tile_image, conf=bbox_conf, verbose=False)
 
         for bbox in bbox_result:
             if len(bbox.boxes.xyxy) == 0:
@@ -143,11 +146,11 @@ def tile_prediction(
 
             bbox_int = list(int(x) for x in bbox.boxes.xyxy[0])
 
-            if pad_bbox > 0:
-                bbox_int[0] = max(0, bbox_int[0] - pad_bbox)
-                bbox_int[1] = max(0, bbox_int[1] - pad_bbox)
-                bbox_int[2] = min(512, bbox_int[2] + pad_bbox)
-                bbox_int[3] = min(512, bbox_int[3] + pad_bbox)
+            if bbox_pad > 0:
+                bbox_int[0] = max(0, bbox_int[0] - bbox_pad)
+                bbox_int[1] = max(0, bbox_int[1] - bbox_pad)
+                bbox_int[2] = min(512, bbox_int[2] + bbox_pad)
+                bbox_int[3] = min(512, bbox_int[3] + bbox_pad)
 
             masks, *_ = sam_predictor.predict(
                 box=[bbox_int],
