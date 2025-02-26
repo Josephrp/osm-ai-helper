@@ -6,24 +6,12 @@ import folium
 import streamlit as st
 from branca.element import MacroElement
 from jinja2 import Template
-from loguru import logger
 from huggingface_hub import hf_hub_download
 from PIL import Image
 from streamlit_folium import st_folium
 
 from osm_ai_helper.run_inference import run_inference
 from osm_ai_helper.upload_osm import upload_osm
-
-
-class StreamlitHandler:
-    def __init__(self):
-        self.text_widget = st.empty()
-        self.log_messages = ""
-
-    def write(self, message):
-        self.log_messages += message
-        self.text_widget.code(self.log_messages)
-        return
 
 
 @st.fragment
@@ -70,6 +58,7 @@ def inference(lat_lon, margin):
             lat_lon=lat_lon,
             margin=margin,
         )
+        st.text(f"Found: {len(new)} new polygons")
     return output_path, new
 
 
@@ -116,7 +105,6 @@ def upload_results(output_path):
             comment = f"Add Swimming Pools. Contributed by {contributor}"
         else:
             comment = "Add Swimming Pools"
-        logger.add(StreamlitHandler(), format="<level>{message}</level>")
 
         changeset = upload_osm(
             results_dir=output_path / "keep",
@@ -140,11 +128,9 @@ show_map()
 lat_lon = st.text_input("Paste the copied (latitude, longitude)")
 
 if st.button("Run Inference") and lat_lon:
-    logger.add(StreamlitHandler(), format="<level>{message}</level>")
-
     lat, lon = lat_lon.split(",")
     output_path, new = inference(
-        lat_lon=(float(lat.strip()), float(lon.strip())), margin=3
+        lat_lon=(float(lat.strip()), float(lon.strip())), margin=2
     )
 
     if new:
