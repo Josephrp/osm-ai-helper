@@ -133,12 +133,13 @@ st.divider()
 st.subheader("Click on the map to select a latitude and longitude.")
 
 st.markdown(
-"""
+    """
 The model will try to find swimming pools around this location.
 
 Note that this model was trained with data from [Galicia](https://nominatim.openstreetmap.org/ui/details.html?osmtype=R&osmid=349036&class=boundary),
-so it might fail to generalize to significantly different places. 
-""")
+so it might fail to generalize to significantly different places.
+"""
+)
 
 show_map()
 
