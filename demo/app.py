@@ -51,14 +51,15 @@ def inference(lat_lon, margin):
             repo_type="model",
             local_dir="models",
         )
-    with st.spinner("Running inference..."):
+    with st.spinner("Downloading image and Running inference..."):
         output_path, existing, new, missed = run_inference(
             yolo_model_file="models/model.pt",
             output_dir="/tmp/results",
             lat_lon=lat_lon,
             margin=margin,
+            save_full_images=False,
         )
-        st.text(f"Found: {len(new)} new polygons")
+        st.info(f"Found: {len(new)} new polygons")
     return output_path, existing, new
 
 
@@ -130,9 +131,9 @@ and [Finetune Model](https://colab.research.google.com/github/mozilla-ai//osm-ai
 
 st.divider()
 
-st.subheader(
-    "Click on the map to select a latitude and longitude. The model will try to find swimming pools around this location."
-)
+st.subheader("Click on the map to select a latitude and longitude.")
+
+st.markdow("The model will try to find swimming pools around this location.")
 
 show_map()
 

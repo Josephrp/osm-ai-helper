@@ -38,6 +38,7 @@ def run_inference(
     sam_model: str = "facebook/sam2.1-hiera-small",
     selector: str = "leisure=swimming_pool",
     zoom: int = 18,
+    save_full_images: bool = True,
 ):
     """
     Run inference on a given location.
@@ -78,8 +79,9 @@ def run_inference(
     stacked_image, stacked_mask = download_stacked_image_and_mask(
         bbox, grouped_elements, zoom, os.environ["MAPBOX_TOKEN"]
     )
-    Image.fromarray(stacked_image).save(output_path / "full_image.png")
-    Image.fromarray(stacked_mask).save(output_path / "full_mask.png")
+    if save_full_images:
+        Image.fromarray(stacked_image).save(output_path / "full_image.png")
+        Image.fromarray(stacked_mask).save(output_path / "full_mask.png")
 
     logger.info("Predicting on stacked image")
     # Change to BGR for inference
@@ -93,7 +95,9 @@ def run_inference(
     logger.info("Painting evaluation")
     stacked_image_pil = Image.fromarray(stacked_image)
     painted_img = paint_polygon_evaluation(stacked_image_pil, existing, new, missed)
-    painted_img.save(output_path / "full_image_painted.png")
+
+    if save_full_images:
+        painted_img.save(output_path / "full_image_painted.png")
 
     _, west, north, _ = bbox
     left_col, top_row = lat_lon_to_tile_col_row(north, west, zoom)
