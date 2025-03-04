@@ -59,7 +59,7 @@ def inference(lat_lon, margin):
             margin=margin,
         )
         st.text(f"Found: {len(new)} new polygons")
-    return output_path, new
+    return output_path, existing, new
 
 
 @st.fragment
@@ -119,9 +119,20 @@ def upload_results(output_path):
 
 st.title("OpenStreetMap AI Helper")
 
+st.markdown(
+    """
+This demo uses [mozilla-ai/swimming-pool-detector](https://huggingface.co/mozilla-ai/swimming-pool-detector).
+
+You can check the [Create Dataset](https://colab.research.google.com/github/mozilla-ai//osm-ai-helper/blob/main/demo/create_dataset.ipyn)
+and [Finetune Model](https://colab.research.google.com/github/mozilla-ai//osm-ai-helper/blob/main/demo/finetune_model.ipynb) notebooks to learn how to train your own model.
+"""
+)
+
 st.divider()
 
-st.subheader("Click on the map to select a latitude and longitude")
+st.subheader(
+    "Click on the map to select a latitude and longitude. The model will try to find swimming pools around this location."
+)
 
 show_map()
 
@@ -129,18 +140,20 @@ lat_lon = st.text_input("Paste the copied (latitude, longitude)")
 
 if st.button("Run Inference") and lat_lon:
     lat, lon = lat_lon.split(",")
-    output_path, new = inference(
+    output_path, existing, new = inference(
         lat_lon=(float(lat.strip()), float(lon.strip())), margin=2
     )
 
+    st.info(f"Found {len(existing)} swimming pools already in OpenStreetMaps.")
+
     if new:
         st.divider()
-        st.header("Review `new` polygons")
+        st.header("Review `new` swimming pools")
         st.markdown(
-            "Every `new` polygon will be displayed at the center of the image in `yellow`."
+            "Every `new` swimming pool will be displayed at the center of the image in `yellow`."
         )
         st.markdown(
-            "Polygons in other colors are those already existing in OpenStreetMap and they just "
+            "Swimming pools in other colors are those already existing in OpenStreetMap and they just "
             "indicate whether the model has found them (`green`) or missed them (`red`)."
         )
         for new in Path(output_path).glob("*.json"):
@@ -148,4 +161,4 @@ if st.button("Run Inference") and lat_lon:
 
         upload_results(output_path)
     else:
-        st.warning("No `new` polygons were found. Try a different location.")
+        st.warning("No `new` swimming pools were found. Try a different location.")
