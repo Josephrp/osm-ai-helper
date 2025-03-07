@@ -110,7 +110,7 @@ def tile_prediction(
     sam_predictor: SAM2ImagePredictor,
     image: np.ndarray,
     overlap: float = 0.125,
-    bbox_conf: float = 0.4,
+    bbox_conf: float = 0.5,
     bbox_pad: int = 0,
 ) -> np.ndarray:
     """
