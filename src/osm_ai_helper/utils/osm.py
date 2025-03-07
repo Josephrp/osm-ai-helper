@@ -4,7 +4,27 @@ from typing import Optional, Tuple
 import requests
 
 
-def get_area_id(area_name: str) -> Optional[int]:
+def get_area(area_name: str) -> dict:
+    """Get the area from Nominatim.
+
+    Uses the [Nominatim API](https://nominatim.org/release-docs/develop/api/Search/).
+
+    Args:
+        area_name (str): The name of the area.
+
+    Returns:
+        dict: The area found.
+    """
+    response = requests.get(
+        f"https://nominatim.openstreetmap.org/search?q={area_name}&format=json",
+        headers={"User-Agent": "Mozilla/5.0"},
+    )
+    response.raise_for_status()
+    response_json = json.loads(response.content.decode())
+    return response_json
+
+
+def get_area_id(area_name: str) -> int:
     """
     Get the Nominatim ID of an area.
 
@@ -14,15 +34,9 @@ def get_area_id(area_name: str) -> Optional[int]:
         area_name (str): The name of the area.
 
     Returns:
-        Optional[int]: The Nominatim ID of the area.
+        int: The Nominatim ID of the area.
     """
-    response = requests.get(
-        f"https://nominatim.openstreetmap.org/search?q={area_name}&format=json",
-        headers={"User-Agent": "Mozilla/5.0"},
-    )
-    response.raise_for_status()
-    response_json = json.loads(response.content.decode())
-    for area in response_json:
+    for area in get_area(area_name):
         osm_type = area.get("osm_type")
         osm_id = area.get("osm_id")
         if osm_type == "way":
